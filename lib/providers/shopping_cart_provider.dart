@@ -38,4 +38,15 @@ class ShoppingCartProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void removeFromCart(String productId) {
+    _cartItems.removeWhere((item) => item.productId == productId);
+    notifyListeners();
+  }
+
+  void updateQuantity(String productId, int quantity) {
+    final item = cartItems.firstWhere((item) => item.productId == productId);
+    item.quantity = quantity;
+    notifyListeners();
+  }
 }

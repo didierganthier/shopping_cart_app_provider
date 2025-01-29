@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_cart_app_provider/providers/shopping_cart_provider.dart';
+import 'package:shopping_cart_app_provider/screens/cart_screen.dart';
 import 'package:shopping_cart_app_provider/widgets/product_item.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -20,10 +21,10 @@ class ProductListScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
-                      //  Navigator.push(
-                      //   context,
-                      //     MaterialPageRoute(builder: (context) => const CartScreen())
-                      //  );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartScreen()));
                     },
                   ),
                   if (cartProvider.getCartCount() > 0)

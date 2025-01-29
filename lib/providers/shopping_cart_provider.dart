@@ -28,10 +28,9 @@ class ShoppingCartProvider extends ChangeNotifier {
   void addToCart(String productId) {
     final existingItem = _cartItems.firstWhere(
       (item) => item.productId == productId,
-      orElse: () => CartItem(productId: productId, quantity: 0),
     );
 
-    if (existingItem.quantity == 0) {
+    if (existingItem == null) {
       _cartItems.add(existingItem);
     } else {
       existingItem.quantity++;

@@ -32,26 +32,46 @@ class _CartItemWidgetState extends State<CartItemWidget> {
         .products
         .firstWhere((product) => product.id == widget.cartItem.productId);
     return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
-            Image.network(
-              product.imageUrl,
-              height: 80,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                product.imageUrl,
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
-              width: 10,
+              width: 15,
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.name,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
-                  Text('\$${product.price.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16)),
+                  Text(
+                    product.name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    '\$${product.price.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -73,10 +93,14 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     }
                   },
                   icon: const Icon(
-                    Icons.delete,
+                    Icons.remove_circle_outline,
+                    color: Colors.red,
                   ),
                 ),
-                Text('$quantity'),
+                Text(
+                  '$quantity',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -86,7 +110,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         .read<ShoppingCartProvider>()
                         .updateQuantity(widget.cartItem.productId, quantity);
                   },
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(
+                    Icons.add_circle_outline,
+                    color: Colors.green,
+                  ),
                 ),
               ],
             )

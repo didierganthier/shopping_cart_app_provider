@@ -10,16 +10,25 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Image.network(
-              product.imageUrl,
-              height: 80,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                product.imageUrl,
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
-              width: 10,
+              width: 15,
             ),
             Expanded(
               child: Column(
@@ -27,13 +36,19 @@ class ProductItem extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: const TextStyle(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text('\$${product.price.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(height: 5),
+                  Text(
+                    '\$${product.price.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -41,6 +56,13 @@ class ProductItem extends StatelessWidget {
               onPressed: () {
                 context.read<ShoppingCartProvider>().addToCart(product.id);
               },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
               child: const Text('Add to Cart'),
             )
           ],

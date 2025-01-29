@@ -49,4 +49,18 @@ class ShoppingCartProvider extends ChangeNotifier {
     item.quantity = quantity;
     notifyListeners();
   }
+
+  double getCartTotal() {
+    double total = 0;
+    for (final cartItem in _cartItems) {
+      final product =
+          _products.firstWhere((product) => product.id == cartItem.productId);
+      total = product.price * cartItem.quantity;
+    }
+    return total;
+  }
+
+  int getCartCount() {
+    return _cartItems.length;
+  }
 }
